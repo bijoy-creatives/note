@@ -1,0 +1,2 @@
+git clone git@github.com:bijoy-creatives/ecommerce.git
+git clone git@github.com:bijoy-creatives/study-materials.git
