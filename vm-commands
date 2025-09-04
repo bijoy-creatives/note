@@ -7,3 +7,18 @@ virsh start <vm-name>
 virsh shutdown <vm-name>
 virsh reboot <vm-name>
 
+virsh list --all
+sudo virsh undefine consul
+
+virsh destroy consul
+
+
+virt-clone --original basevm --name consul-vm-01 --file /var/lib/libvirt/images/consul-vm-01.qcow2
+
+virsh domifaddr consul-vm-01
+
+
+
+
+ssh vmuser@192.168.122.191
+
