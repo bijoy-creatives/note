@@ -1,0 +1,9 @@
+cut -d: -f1 /etc/passwd
+sudo deluser --remove-home vmrootuser
+
+
+virsh list --all
+virsh start <vm-name>
+virsh shutdown <vm-name>
+virsh reboot <vm-name>
+

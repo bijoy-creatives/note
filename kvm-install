@@ -1,0 +1,40 @@
+#Install KVM and dependencies
+sudo apt install -y qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virt-manager
+#Enable and start libvirtd
+
+sudo systemctl enable --now libvirtd
+sudo systemctl status libvirtd
+
+
+#Add your user to the libvirt group
+So you can run VMs without root:
+
+sudo usermod -aG libvirt $(whoami)
+newgrp libvirt
+
+
+**********************************************************************************************************************************************************
+                        INSIDE VM FOR IP
+**********************************************************************************************************************************************************
+network:
+  version: 2
+  ethernets:
+    ens3:
+      addresses: [192.168.122.51/24]
+      gateway4: 192.168.122.1
+      nameservers:
+        addresses: [8.8.8.8, 8.8.4.4]
+
+**********************************************************************************************************************************************************
+                        INSIDE VM FOR INSTALL SOFTWARE
+**********************************************************************************************************************************************************
+sudo apt install openjdk-21-jdk-headless -y
+sudo apt install maven -y
+
+VM command 
+
+/var/lib/libvirt/images
+/etc/libvirt/qemu
+
+
+virsh list --all
