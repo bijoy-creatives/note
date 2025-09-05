@@ -1,0 +1,2 @@
+egrep -c '(vmx|svm)' /proc/cpuinfo
+sudo dmesg | grep -e DMAR -e IOMMU

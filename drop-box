@@ -1,0 +1,5 @@
+sudo apt install python3-gpg
+wget -O - "https://linux.dropbox.com/fedora/rpm-public-key.asc" | gpg --dearmor | sudo tee /usr/share/keyrings/dropbox.gpg > /dev/null
+echo "deb [signed-by=/usr/share/keyrings/dropbox.gpg] http://linux.dropbox.com/ubuntu $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/dropbox.list
+sudo apt update
+sudo apt install dropbox
