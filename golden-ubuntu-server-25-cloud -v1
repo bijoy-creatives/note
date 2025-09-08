@@ -1,0 +1,78 @@
+sudo virt-install \
+  --name golden-ubuntu-server-25.04-microservice \
+  --ram 4096 \
+  --vcpus 4 \
+  --cpu host-model \
+  --import \
+  --disk path=/home/bijoy/vm-iso/ubuntu-25.04-server-cloudimg-amd64.img,format=qcow2,bus=virtio \
+  --disk path=/home/bijoy/cloud-init/cloud-init.iso,device=cdrom,readonly=on \
+  --os-variant ubuntu25.04 \
+  --network bridge=br0 \
+  --graphics vnc \
+  --noautoconsole
+
+
+
+  sudo virt-install \
+  --name golden-ubuntu-server-25.04-microservice \
+  --ram 4096 \
+  --vcpus 4 \
+  --cpu host-model \
+  --import \
+  --disk path=/home/bijoy/vm-iso/ubuntu-25.04-server-cloudimg-amd64.img,format=qcow2,bus=virtio \
+  --disk path=/home/bijoy/cloud-init/cloud-init.iso,device=cdrom,readonly=on \
+  --os-variant ubuntu25.04 \
+  --network network=default \
+  --graphics vnc \
+  --noautoconsole
+
+
+  sudo virt-install \
+  --name golden-ubuntu-server-25.04-microservice \
+  --ram 4096 \
+  --vcpus 4 \
+  --cpu host-model \
+  --import \
+  --disk path=/home/bijoy/vm-iso/ubuntu-25.04-server-cloudimg-amd64.img,format=qcow2,bus=virtio \
+  --disk path=/home/bijoy/cloud-init/cloud-init.iso,device=cdrom,readonly=on \
+  --os-variant ubuntu25.04 \
+  --network bridge=br0,model=virtio \
+  --graphics vnc \
+  --noautoconsole \
+  --channel unix,target.type=virtio,target.name=org.qemu.guest_agent.0
+
+
+  sudo virt-install \
+  --name golden-ubuntu-server-25.04-microservice \
+  --ram 4096 \
+  --vcpus 4 \
+  --cpu host-model \
+  --import \
+  --disk path=/home/bijoy/vm-iso/ubuntu-25.04-server-cloudimg-amd64.img,format=qcow2,bus=virtio \
+  --disk path=/home/bijoy/cloud-init/cloud-init.iso,device=cdrom,readonly=on \
+  --os-variant ubuntu25.04 \
+  --network bridge=br0,model=virtio \
+  --graphics vnc \
+  --noautoconsole \
+  --channel unix,target.type=virtio,target.name=org.qemu.guest_agent.0
+
+
+
+
+sudo systemctl status qemu-guest-agent
+
+
+
+
+
+  genisoimage -output cloud-init.iso -volid cidata -joliet -rock user-data meta-data
+  genisoimage -output cloud-init.iso -volid cidata -joliet -rock user-data meta-data
+
+  virsh start golden-ubuntu-server-25.04-microservice
+  virsh domifaddr golden-ubuntu-server-25.04-microservice
+  virsh domiflist golden-ubuntu-server-25.04-microservice
+
+  sudo virsh destroy golden-ubuntu-server-25.04-microservice 
+  sudo virsh undefine golden-ubuntu-server-25.04-microservice
+
+   sudo virsh destroy golden-ubuntu-server-25.04-microservice  && sudo virsh undefine golden-ubuntu-server-25.04-microservice

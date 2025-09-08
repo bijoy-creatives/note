@@ -16,6 +16,7 @@ virsh destroy consul
 virt-clone --original basevm --name consul-vm-01 --file /var/lib/libvirt/images/consul-vm-01.qcow2
 
 virsh domifaddr consul-vm-01
+virsh domblklist  basevm
 
 
 

@@ -1,0 +1,14 @@
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    eno1: {}
+  bridges:
+    br0:
+      interfaces: [eno1]
+      dhcp4: yes
+      dhcp6: no
+      nameservers:
+        addresses: [8.8.8.8, 8.8.4.4]
+
+

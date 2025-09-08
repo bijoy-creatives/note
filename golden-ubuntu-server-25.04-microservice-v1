@@ -1,0 +1,39 @@
+golden-ubuntu-server-25.04-microservice-dev-v1
+
+sudo virt-install \
+  --name golden-ubuntu-server-25.04-microservice \
+  --ram 4096 \
+  --vcpus 2 \
+  --cpu host-model \
+  --disk path=/var/lib/libvirt/images/golden-ubuntu-server-25.04-microservice.qcow2,size=20 \
+  --os-variant ubuntu25.04 \
+  --network bridge=br0 \
+  --graphics none \
+  --cdrom /home/bijoy/vm-iso/ubuntu-25.04-live-server-amd64-in.iso \
+  --noautoconsole
+
+
+sudo virt-install \
+  --name golden-ubuntu-server-25.04-microservice \
+  --ram 4096 \
+  --vcpus 2 \
+  --cpu host-model \
+  --disk path=/var/lib/libvirt/images/golden-ubuntu-server-25.04-microservice.qcow2,size=20 \
+  --os-variant ubuntu25.04 \
+  --network bridge=br0 \
+  --cdrom /home/bijoy/vm-iso/ubuntu-25.04-live-server-amd64-in.iso \
+  --noautoconsole \
+  --graphics vnc
+
+
+
+
+
+
+
+sudo virsh destroy golden-ubuntu-server-25.04-microservice
+sudo virsh undefine golden-ubuntu-server-25.04-microservice
+
+
+sudo apt install openjdk-21-jdk-headless -y
+sudo apt install maven -y
