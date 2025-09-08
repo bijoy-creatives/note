@@ -1,0 +1,11 @@
+cat << EOF > user-data
+#cloud-config
+password: password
+chpasswd:
+  expire: False
+   ssh_authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKUV/RYJ0QwXblR3YtHyJGG97/Qu+Mv/mU0KEBQUKsZf bijoy@creative
+
+EOF
+
+

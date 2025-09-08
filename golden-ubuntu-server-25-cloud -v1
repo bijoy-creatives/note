@@ -1,62 +1,34 @@
-sudo virt-install \
-  --name golden-ubuntu-server-25.04-microservice \
-  --ram 4096 \
-  --vcpus 4 \
-  --cpu host-model \
-  --import \
-  --disk path=/home/bijoy/vm-iso/ubuntu-25.04-server-cloudimg-amd64.img,format=qcow2,bus=virtio \
-  --disk path=/home/bijoy/cloud-init/cloud-init.iso,device=cdrom,readonly=on \
-  --os-variant ubuntu25.04 \
-  --network bridge=br0 \
-  --graphics vnc \
-  --noautoconsole
-
-
 
   sudo virt-install \
-  --name golden-ubuntu-server-25.04-microservice \
+  --name golden-noble-server-cloudimg-amd64-microservice \
   --ram 4096 \
   --vcpus 4 \
   --cpu host-model \
   --import \
-  --disk path=/home/bijoy/vm-iso/ubuntu-25.04-server-cloudimg-amd64.img,format=qcow2,bus=virtio \
-  --disk path=/home/bijoy/cloud-init/cloud-init.iso,device=cdrom,readonly=on \
-  --os-variant ubuntu25.04 \
-  --network network=default \
-  --graphics vnc \
-  --noautoconsole
-
-
-  sudo virt-install \
-  --name golden-ubuntu-server-25.04-microservice \
-  --ram 4096 \
-  --vcpus 4 \
-  --cpu host-model \
-  --import \
-  --disk path=/home/bijoy/vm-iso/ubuntu-25.04-server-cloudimg-amd64.img,format=qcow2,bus=virtio \
-  --disk path=/home/bijoy/cloud-init/cloud-init.iso,device=cdrom,readonly=on \
-  --os-variant ubuntu25.04 \
-  --network bridge=br0,model=virtio \
+  --disk path=/home/bijoy/vm-iso/noble-server-cloudimg-amd64.img,format=qcow2,bus=virtio \
+  --disk path=/home/bijoy/cloud-init/golden-noble-server-cloudimg-amd64-microservice.iso,device=cdrom,readonly=on \
+  --os-variant ubuntu24.04 \
+  --network network=default,model=virtio \
   --graphics vnc \
   --noautoconsole \
   --channel unix,target.type=virtio,target.name=org.qemu.guest_agent.0
 
 
   sudo virt-install \
-  --name golden-ubuntu-server-25.04-microservice \
+  --name golden-noble-server-cloudimg-amd64-microservice-2 \
   --ram 4096 \
   --vcpus 4 \
   --cpu host-model \
   --import \
-  --disk path=/home/bijoy/vm-iso/ubuntu-25.04-server-cloudimg-amd64.img,format=qcow2,bus=virtio \
-  --disk path=/home/bijoy/cloud-init/cloud-init.iso,device=cdrom,readonly=on \
-  --disk path=/home/bijoy/vm-iso/cloud-init.iso,device.iso,device=cdrom,readonly=on,bus=ide \
-  --os-variant ubuntu25.04 \
-  --os-variant ubuntu25.04 \
+  --disk path=/home/bijoy/vm-iso/noble-server-cloudimg-amd64.img,format=qcow2,bus=virtio \
+  --disk path=/home/bijoy/cloud-init/noble-server-cloudimg-amd64-vm2.iso,device=cdrom,readonly=on \
+  --os-variant ubuntu24.04 \
   --network bridge=br0,model=virtio \
   --graphics vnc \
   --noautoconsole \
   --channel unix,target.type=virtio,target.name=org.qemu.guest_agent.0
+
+
 
 
 
@@ -65,16 +37,42 @@ sudo systemctl status qemu-guest-agent
 
 
 
+ genisoimage -output noble-server-cloudimg-amd64.iso -volid cidata -r -J user-data meta-data network-config
+
+ genisoimage -output ~/cloud-init/golden-noble-server-cloudimg-amd64-microservice.iso.iso \
+-volid cidata -r -J \
+~/java/note/golden-noble-server-cloudimg-amd64-microservice/user-data \
+~/java/note/golden-noble-server-cloudimg-amd64-microservice/meta-data \
+~/java/note/golden-noble-server-cloudimg-amd64-microservice/network-config
 
 
   genisoimage -output cloud-init.iso -volid cidata -joliet -rock user-data meta-data
   genisoimage -output cloud-init.iso -volid cidata -joliet -rock user-data meta-data
+  genisoimage -output cloud-init.iso -volid cidata -joliet -rock user-data meta-data network-config
+  genisoimage -output cloud-init.iso -volid cidata -joliet -rock user-data meta-data network-config
+ 
+  genisoimage -output cloud-init.iso -volid cidata -r -rock user-data meta-data network-config
+  genisoimage -output cloud-init.iso -volid cidata -r -rock user-data meta-data network-config
 
-  virsh start golden-ubuntu-server-25.04-microservice
-  virsh domifaddr golden-ubuntu-server-25.04-microservice
-  virsh domiflist golden-ubuntu-server-25.04-microservice
 
-  sudo virsh destroy golden-ubuntu-server-25.04-microservice 
-  sudo virsh undefine golden-ubuntu-server-25.04-microservice
 
-   sudo virsh destroy golden-ubuntu-server-25.04-microservice  && sudo virsh undefine golden-ubuntu-server-25.04-microservice
+
+
+
+  isoinfo -i cloud-init.iso -R -l
+virsh console golden-noble-server-cloudimg-amd64-microservice
+virsh console 
+vmuser/vmuser
+
+  virsh start golden-noble-server-cloudimg-amd64-microservice
+  virsh domifaddr golden-noble-server-cloudimg-amd64-microservice
+  virsh domiflist golden-noble-server-cloudimg-amd64-microservice
+
+  sudo virsh destroy golden-noble-server-cloudimg-amd64-microservice 
+  sudo virsh undefine golden-noble-server-cloudimg-amd64-microservice
+
+   sudo virsh destroy golden-noble-server-cloudimg-amd64-microservice  && sudo virsh undefine golden-noble-server-cloudimg-amd64-microservice
+
+   virsh restart golden-noble-server-cloudimg-amd64-microservice
+
+   virsh list --all

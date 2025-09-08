@@ -1,0 +1,30 @@
+#cloud-config
+hostname: golden-ubuntu-server-25.04-microservice
+manage_etc_hosts: true
+
+users:
+  - name: vmuser
+    gecos: VM User
+    shell: /bin/bash
+    lock_passwd: false
+    passwd: $6$PWXUaENFEPodg5vQ$05qxgYq33JQeH47zdsXKJYp2Cvd1YjHtgCLITJuLnVT8Ll9AIOURfL78QpG7PO3bkpyoxfToNDj/8AGAXK9VE0
+    ssh_authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKUV/RYJ0QwXblR3YtHyJGG97/Qu+Mv/mU0KEBQUKsZf bijoy@creative
+
+package_update: true
+package_upgrade: true
+packages:
+  - qemu-guest-agent
+  - htop
+  - git
+
+ssh_pwauth: true
+disable_root: false
+chpasswd:
+  expire: false
+
+runcmd:
+  - groupadd -f sudo
+  - usermod -aG sudo vmuser
+  - echo "vmuser ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/vmuser
+  - chmod 440 /etc/sudoers.d/vmuser
