@@ -17,7 +17,7 @@ packages:
   - htop
   - git
 
-ssh_pwauth: false
+ssh_pwauth: true
 
 # Network configuration
 network:

@@ -50,6 +50,8 @@ sudo virt-install \
   --import \
   --disk path=/home/bijoy/vm-iso/ubuntu-25.04-server-cloudimg-amd64.img,format=qcow2,bus=virtio \
   --disk path=/home/bijoy/cloud-init/cloud-init.iso,device=cdrom,readonly=on \
+  --disk path=/home/bijoy/vm-iso/cloud-init.iso,device.iso,device=cdrom,readonly=on,bus=ide \
+  --os-variant ubuntu25.04 \
   --os-variant ubuntu25.04 \
   --network bridge=br0,model=virtio \
   --graphics vnc \
