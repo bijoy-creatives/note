@@ -39,11 +39,11 @@ sudo systemctl status qemu-guest-agent
 
  genisoimage -output noble-server-cloudimg-amd64.iso -volid cidata -r -J user-data meta-data network-config
 
- genisoimage -output ~/cloud-init/golden-noble-server-cloudimg-amd64-microservice.iso.iso \
+ genisoimage -output ~/cloud-init/golden-noble-server-cloudimg-amd64-microservice.iso \
 -volid cidata -r -J \
-~/java/note/golden-noble-server-cloudimg-amd64-microservice/user-data \
-~/java/note/golden-noble-server-cloudimg-amd64-microservice/meta-data \
-~/java/note/golden-noble-server-cloudimg-amd64-microservice/network-config
+~/java/note/cloud-init/golden-noble-server-cloudimg-amd64-microservice/user-data \
+~/java/note/cloud-init/golden-noble-server-cloudimg-amd64-microservice/meta-data \
+~/java/note/cloud-init/golden-noble-server-cloudimg-amd64-microservice/network-config
 
 
   genisoimage -output cloud-init.iso -volid cidata -joliet -rock user-data meta-data
@@ -76,3 +76,16 @@ vmuser/vmuser
    virsh restart golden-noble-server-cloudimg-amd64-microservice
 
    virsh list --all
+
+   isoinfo -i ~/cloud-init/golden-noble-server-cloudimg-amd64-microservice.iso -R -l
+
+   sudo cloud-init status
+   sudo cloud-init status --long
+
+   
+
+sudo cloud-init clean
+sudo cloud-init init
+sudo cloud-init modules --mode=config
+sudo cloud-init modules --mode=final
+
