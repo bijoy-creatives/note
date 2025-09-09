@@ -1,0 +1,12 @@
+#cloud-config
+users:
+  - name: ubuntu
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    plain_text_passwd: "ubuntu"    # password login
+    lock_passwd: false
+    ssh_authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKUV/RYJ0QwXblR3YtHyJGG97/Qu+Mv/mU0KEBQUKsZf bijoy@creative  # your public key
+ssh_pwauth: true                  # enable password SSH login
+chpasswd:
+  expire: False

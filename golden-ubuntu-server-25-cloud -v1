@@ -15,15 +15,15 @@
 
 
   sudo virt-install \
-  --name golden-noble-server-cloudimg-amd64-microservice-2 \
+  --name consul-microservice \
   --ram 4096 \
   --vcpus 4 \
   --cpu host-model \
   --import \
   --disk path=/home/bijoy/vm-iso/noble-server-cloudimg-amd64.img,format=qcow2,bus=virtio \
-  --disk path=/home/bijoy/cloud-init/noble-server-cloudimg-amd64-vm2.iso,device=cdrom,readonly=on \
+  --disk path=/home/bijoy/cloud-init/consul.iso,device=cdrom,readonly=on \
   --os-variant ubuntu24.04 \
-  --network bridge=br0,model=virtio \
+  --network network=default,model=virtio \
   --graphics vnc \
   --noautoconsole \
   --channel unix,target.type=virtio,target.name=org.qemu.guest_agent.0
@@ -44,6 +44,17 @@ sudo systemctl status qemu-guest-agent
 ~/java/note/cloud-init/golden-noble-server-cloudimg-amd64-microservice/user-data \
 ~/java/note/cloud-init/golden-noble-server-cloudimg-amd64-microservice/meta-data \
 ~/java/note/cloud-init/golden-noble-server-cloudimg-amd64-microservice/network-config
+
+
+genisoimage -output ~/cloud-init/golden-noble-server-cloudimg-amd64-microservice.iso \
+-volid cidata -joliet -rock \
+~/java/note/cloud-init/golden-noble-server-cloudimg-amd64-microservice/
+
+
+genisoimage -output ~/cloud-init/consul.iso \
+-volid cidata -joliet -rock \
+~/java/note/cloud-init/consul/
+
 
 
   genisoimage -output cloud-init.iso -volid cidata -joliet -rock user-data meta-data
