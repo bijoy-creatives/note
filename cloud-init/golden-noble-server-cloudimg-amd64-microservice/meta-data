@@ -1,1 +1,2 @@
-instance-id: golden-noble-server-cloudimg-amd64-microservice/golden-noble-server-cloudimg-amd64-microservice
+instance-id: golden-noble-server-cloudimg-amd64-microservice
+local-hostname: golden-noble-server-cloudimg-amd64-microservice

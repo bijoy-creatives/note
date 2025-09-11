@@ -5,7 +5,7 @@
   --vcpus 4 \
   --cpu host-model \
   --import \
-  --disk path=/home/bijoy/vm-iso/noble-server-cloudimg-amd64.img,format=qcow2,bus=virtio \
+  --disk path=/home/bijoy/vm-iso/noble-server-cloudimg-amd64.img,format=qcow2,bus=virtio,size=20 \
   --disk path=/home/bijoy/cloud-init/golden-noble-server-cloudimg-amd64-microservice.iso,device=cdrom,readonly=on \
   --os-variant ubuntu24.04 \
   --network network=default,model=virtio \
@@ -20,7 +20,7 @@
   --vcpus 4 \
   --cpu host-model \
   --import \
-  --disk path=/home/bijoy/vm-iso/noble-server-cloudimg-amd64.img,format=qcow2,bus=virtio \
+  --disk path=/home/bijoy/vm-iso/consul-cloudimg.img,format=qcow2,bus=virtio,size=20 \
   --disk path=/home/bijoy/cloud-init/consul.iso,device=cdrom,readonly=on \
   --os-variant ubuntu24.04 \
   --network network=default,model=virtio \
@@ -30,7 +30,7 @@
 
 
 
-
+golden-noble-server-cloudimg-amd64-microservice.iso
 
 
 sudo systemctl status qemu-guest-agent
@@ -49,6 +49,10 @@ sudo systemctl status qemu-guest-agent
 genisoimage -output ~/cloud-init/golden-noble-server-cloudimg-amd64-microservice.iso \
 -volid cidata -joliet -rock \
 ~/java/note/cloud-init/golden-noble-server-cloudimg-amd64-microservice/
+
+genisoimage -output cloud-init-seed.iso -volid cidata -joliet -rock \
+  cloud-init/user-data cloud-init/meta-data cloud-init/network-config
+
 
 
 genisoimage -output ~/cloud-init/consul.iso \
@@ -93,10 +97,13 @@ vmuser/vmuser
    sudo cloud-init status
    sudo cloud-init status --long
 
-   
+   sudo tail -f /var/log/cloud-init-output.log
 
 sudo cloud-init clean
 sudo cloud-init init
 sudo cloud-init modules --mode=config
 sudo cloud-init modules --mode=final
+
+
+sudo qemu-img resize /home/bijoy/vm-iso/noble-server-cloudimg-amd64.img 20G
 
