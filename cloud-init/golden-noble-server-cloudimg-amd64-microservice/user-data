@@ -17,4 +17,5 @@ package_reboot_if_required: true   # optional: reboot if kernel or core packages
 
 # Install Maven directly via packages
 runcmd:
-  - sudo apt install openjdk-21-jre-headless # version 21.0.8+9~us1-0ubuntu1~24.04.1
+  - sudo apt install -y openjdk-21-jre-headless # version 21.0.8+9~us1-0ubuntu1~24.04.1
+  - sudo apt install -y maven
